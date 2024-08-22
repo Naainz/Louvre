@@ -13,13 +13,28 @@
           swayAmplitude: {type: 'number', default: 0.03},
           swaySpeed: {type: 'number', default: 2.5},
           randomSway: {type: 'number', default: 0.002},
-          moveSpeed: {type: 'number', default: 1.2}
+          moveSpeed: {type: 'number', default: 1.2},
+          sprintMultiplier: {type: 'number', default: 3}
         },
         init: function () {
-          this.el.addEventListener('componentchanged', this.onComponentChanged.bind(this));
           this.bobbing = false;
           this.moving = false;
           this.time = 0;
+          this.isSprinting = false;
+          this.normalAcceleration = 20;
+          this.sprintAcceleration = this.normalAcceleration * this.data.sprintMultiplier;
+
+          window.addEventListener('keydown', (e) => {
+            if (e.key === 'Shift') {
+              this.el.setAttribute('wasd-controls', `acceleration: ${this.sprintAcceleration}`);
+            }
+          });
+          
+          window.addEventListener('keyup', (e) => {
+            if (e.key === 'Shift') {
+              this.el.setAttribute('wasd-controls', `acceleration: ${this.normalAcceleration}`);
+            }
+          });
         },
         tick: function (time, timeDelta) {
           this.time += timeDelta / 1000;
@@ -35,11 +50,6 @@
 
             rotation.y += (Math.random() - 0.5) * this.data.randomSway * timeDelta;
             this.el.setAttribute('rotation', rotation);
-
-            const velocity = this.el.getAttribute('velocity');
-            velocity.x *= this.data.moveSpeed;
-            velocity.z *= this.data.moveSpeed;
-            this.el.setAttribute('velocity', velocity);
           }
           this.el.setAttribute('position', position);
         },
@@ -56,7 +66,6 @@
   </head>
   <body>
     <a-scene>
-      <!-- Clear, partly cloudy sky -->
       <a-sky src="#cloudySkyTexture"></a-sky>
       
       <a-entity camera wasd-controls="acceleration: 20" look-controls position="0 1.6 0" head-bob>
@@ -72,13 +81,9 @@
       <a-plane position="0 0 0" rotation="-90 0 0" width="200" height="200" color="#808080" material="src: #tile-texture; repeat: 100 100"></a-plane>
 
       <a-entity id="surroundings">
-        <!-- Front Wall -->
         <a-box position="0 25 -100" rotation="0 0 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0 0"></a-box>
-        <!-- Back Wall -->
         <a-box position="0 25 100" rotation="0 180 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.25 0"></a-box>
-        <!-- Left Wall -->
         <a-box position="-100 25 0" rotation="0 90 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.5 0"></a-box>
-        <!-- Right Wall -->
         <a-box position="100 25 0" rotation="0 -90 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.75 0"></a-box>
       </a-entity>
 
