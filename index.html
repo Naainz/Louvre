@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Virtual Louvre</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity camera wasd-controls look-controls position="0 1.6 0">
+        <a-entity cursor="fuse: true; fuseTimeout: 500"
+                  position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                  material="color: black; shader: flat"></a-entity>
+      </a-entity>
+      
+      <a-light type="ambient" color="#888"></a-light>
+      <a-light type="directional" color="#FFF" intensity="0.5" position="1 1 0"></a-light>
+
+      <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
+      
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere position="1 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder position="0 0.75 -7" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-cone position="0 1 -10" radius-bottom="0.5" radius-top="0.2" height="2" color="#FFC65D"></a-cone>
+    </a-scene>
+  </body>
+</html>
