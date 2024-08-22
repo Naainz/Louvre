@@ -91,7 +91,22 @@
         <img id="tile-texture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="pano" src="assets/pano.jpg">
         <img id="cloudySkyTexture" src="assets/cloudy.jpg">
+        <img id="pyramid-texture" src="assets/pyramid-grid.jpg">
       </a-assets>
+
+      <!-- Louvre Pyramid -->
+      <a-entity id="louvre-pyramid">
+        <!-- Front Face -->
+        <a-plane position="0 5 -20" rotation="0 0 0" width="14.14" height="10" material="src: #pyramid-texture; transparent: true; opacity: 0.8;"></a-plane>
+        <!-- Left Face -->
+        <a-plane position="-7.07 5 -20" rotation="0 45 0" width="14.14" height="10" material="src: #pyramid-texture; transparent: true; opacity: 0.8;"></a-plane>
+        <!-- Right Face -->
+        <a-plane position="7.07 5 -20" rotation="0 -45 0" width="14.14" height="10" material="src: #pyramid-texture; transparent: true; opacity: 0.8;"></a-plane>
+        <!-- Back Face -->
+        <a-plane position="0 5 -34.14" rotation="0 180 0" width="14.14" height="10" material="src: #pyramid-texture; transparent: true; opacity: 0.8;"></a-plane>
+        <!-- Entrance -->
+        <a-box position="0 2.5 -14.9" width="4" height="5" depth="0.1" color="#000"></a-box>
+      </a-entity>
     </a-scene>
   </body>
 </html>
