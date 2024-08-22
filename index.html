@@ -71,10 +71,14 @@
       <a-plane position="0 0 0" rotation="-90 0 0" width="200" height="200" color="#808080" material="src: #tile-texture; repeat: 100 100"></a-plane>
 
       <a-entity id="surroundings">
-        <a-box position="-100 25 -100" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0 0"></a-box>
-        <a-box position="100 25 -100" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.25 0"></a-box>
-        <a-box position="-100 25 100" depth="1" height="50" width="200" rotation="0 90 0" material="src: #pano; repeat: 0.25 1; offset: 0.5 0"></a-box>
-        <a-box position="100 25 100" depth="1" height="50" width="200" rotation="0 90 0" material="src: #pano; repeat: 0.25 1; offset: 0.75 0"></a-box>
+        <!-- Front Wall -->
+        <a-box position="0 25 -100" rotation="0 0 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0 0"></a-box>
+        <!-- Back Wall -->
+        <a-box position="0 25 100" rotation="0 180 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.25 0"></a-box>
+        <!-- Left Wall -->
+        <a-box position="-100 25 0" rotation="0 90 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.5 0"></a-box>
+        <!-- Right Wall -->
+        <a-box position="100 25 0" rotation="0 -90 0" depth="1" height="50" width="200" material="src: #pano; repeat: 0.25 1; offset: 0.75 0"></a-box>
       </a-entity>
 
       <a-assets>
