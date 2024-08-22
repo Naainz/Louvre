@@ -2,6 +2,7 @@
 
 This project creates a simple virtual representation of the Louvre Pyramid using A-Frame. The page features a glass-like cone with a grid pattern similar to the Louvre Pyramid. Inside the cone, the famous painting "Mona Lisa" is displayed. 
 
+
 ## Features
 
 - A glass-like cone with a grid pattern
