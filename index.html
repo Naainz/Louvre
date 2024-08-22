@@ -4,11 +4,59 @@
     <meta charset="utf-8">
     <title>Virtual Louvre</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('head-bob', {
+        schema: {
+          amplitude: {type: 'number', default: 0.05},
+          speed: {type: 'number', default: 5},
+          movingAmplitude: {type: 'number', default: 0.05},
+          swayAmplitude: {type: 'number', default: 0.03},
+          swaySpeed: {type: 'number', default: 2.5},
+          randomSway: {type: 'number', default: 0.002},
+          moveSpeed: {type: 'number', default: 1.2}
+        },
+        init: function () {
+          this.el.addEventListener('componentchanged', this.onComponentChanged.bind(this));
+          this.bobbing = false;
+          this.moving = false;
+          this.time = 0;
+        },
+        tick: function (time, timeDelta) {
+          this.time += timeDelta / 1000;
+          let position = this.el.getAttribute('position');
+          let rotation = this.el.getAttribute('rotation');
+
+          if (this.bobbing) {
+            position.y = 1.6 + Math.sin(this.time * this.data.speed) * this.data.amplitude;
+          } else if (this.moving) {
+            position.y = 1.6 + Math.sin(this.time * this.data.speed) * this.data.movingAmplitude;
+            position.x += Math.sin(this.time * this.data.swaySpeed) * this.data.swayAmplitude;
+            position.z += Math.cos(this.time * this.data.swaySpeed) * this.data.swayAmplitude;
+
+            rotation.y += (Math.random() - 0.5) * this.data.randomSway * timeDelta;
+            this.el.setAttribute('rotation', rotation);
+
+            const velocity = this.el.getAttribute('velocity');
+            velocity.x *= this.data.moveSpeed;
+            velocity.z *= this.data.moveSpeed;
+            this.el.setAttribute('velocity', velocity);
+          }
+          this.el.setAttribute('position', position);
+        },
+        onComponentChanged: function (evt) {
+          if (evt.detail.name === 'velocity') {
+            const velocity = this.el.getAttribute('velocity');
+            const speed = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
+            this.bobbing = speed < 0.1;
+            this.moving = speed >= 0.1;
+          }
+        }
+      });
+    </script>
   </head>
   <body>
     <a-scene>
-      <a-entity camera wasd-controls look-controls position="0 1.6 0" 
-                animation="property: position; to: 0 1.65 0; dir: alternate; dur: 500; loop: true; easing: easeInOutSine">
+      <a-entity camera wasd-controls="acceleration: 20" look-controls position="0 1.6 0" head-bob>
         <a-entity cursor="fuse: true; fuseTimeout: 500"
                   position="0 0 -1"
                   geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
