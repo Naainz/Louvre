@@ -92,9 +92,15 @@
         <img id="pano" src="assets/pano.jpg">
         <img id="cloudySkyTexture" src="assets/cloudy.jpg">
         <img id="pyramid-texture" src="assets/pyramid-grid.jpg">
+        <img id="mona-lisa" src="assets/mona.jpg">
       </a-assets>
 
       <a-cone position="0 5 -20" radius-bottom="10" height="10" material="src: #pyramid-texture; transparent: true; opacity: 0.8; repeat: 3 3;"></a-cone>
+      
+      <a-entity position="0 3 -20">
+        <a-plane position="0 0 0.01" width="2.5" height="3.5" color="brown"></a-plane>
+        <a-plane position="0 0 0.02" width="2" height="3" material="src: #mona-lisa"></a-plane>
+      </a-entity>
     </a-scene>
   </body>
 </html>
