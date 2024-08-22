@@ -56,7 +56,8 @@
   </head>
   <body>
     <a-scene>
-      <a-sky color="#FFDAB9"></a-sky>
+      <!-- Clear, partly cloudy sky -->
+      <a-sky src="#cloudySkyTexture"></a-sky>
       
       <a-entity camera wasd-controls="acceleration: 20" look-controls position="0 1.6 0" head-bob>
         <a-entity cursor="fuse: true; fuseTimeout: 500"
@@ -84,6 +85,7 @@
       <a-assets>
         <img id="tile-texture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="pano" src="assets/pano.jpg">
+        <img id="cloudySkyTexture" src="assets/cloudy.jpg">
       </a-assets>
     </a-scene>
   </body>
